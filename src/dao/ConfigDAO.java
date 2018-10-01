@@ -103,6 +103,10 @@ public class ConfigDAO {
         return cs;
     }
 
+    public List<Config> list(){
+        return list(0, Short.MAX_VALUE);
+    }
+
     public Config getByKey(String key){
         Config config = null;
         String sql = "select * from config where key_ = ?";
@@ -119,5 +123,9 @@ public class ConfigDAO {
             e.printStackTrace();
         }
         return config;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Short.MAX_VALUE);
     }
 }

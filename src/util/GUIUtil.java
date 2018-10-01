@@ -5,8 +5,13 @@ import java.awt.*;
 import java.io.File;
 
 public class GUIUtil {
-    // D:/project/hutubill/img
-    private static String imageFolder = "D:/code/hutubill/img";
+    /**
+     * 不同配置路径
+     * D:/project/hutubill/img
+     * D:/code/hutubill/img
+      */
+
+    private static String imageFolder = "D:/project/hutubill/img";
 
     public static void setImageIcon(JButton b, String fileName, String tip){
         ImageIcon i = new ImageIcon(new File(imageFolder, fileName).getAbsolutePath());
