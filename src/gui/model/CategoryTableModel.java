@@ -1,5 +1,8 @@
 package gui.model;
 
+import entity.Category;
+import service.CategoryService;
+
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
@@ -7,14 +10,8 @@ import java.util.List;
 
 public class CategoryTableModel implements TableModel {
     String[] columbNames = new String[]{"分类名称","消费次数"};
-    List<String> cs = new ArrayList<>();
+    public List<Category> cs = new CategoryService().list();
 
-    public CategoryTableModel(){
-        cs.add("餐饮");
-        cs.add("交通");
-        cs.add("住宿");
-        cs.add("话费");
-    }
 
     @Override
     public int getRowCount() {
@@ -43,10 +40,11 @@ public class CategoryTableModel implements TableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        Category h = cs.get(rowIndex);
         if (0 == columnIndex)
-            return cs.get(rowIndex);
+            return h.name;
         if (1 == columnIndex)
-            return 0;
+            return h.recordNumber;
         return null;
     }
 

@@ -35,7 +35,7 @@ public class RecordDAO {
             ps.setInt(2, record.getCid());
             ps.setString(3, record.getComment());
             ps.setDate(4, DateUtil.util2sql(record.getDate()));
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 int id  = rs.getInt("id");
                 record.setId(id);
@@ -74,7 +74,7 @@ public class RecordDAO {
         String sql = "select * from record where id = ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 record = new Record();
                 record.setId(id);
@@ -96,7 +96,7 @@ public class RecordDAO {
             ps.setInt(1, start);
             ps.setInt(2, count);
 
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 records = new ArrayList<>();
                 Record record = new Record();
@@ -122,7 +122,7 @@ public class RecordDAO {
         String sql = "select * from record where cid = ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setInt(1, cid);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 records = new ArrayList<>();
                 Record record = new Record();
@@ -144,7 +144,7 @@ public class RecordDAO {
         String sql = "select * from record where date = ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)){
             ps.setDate(1, DateUtil.util2sql(date));
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 records = new ArrayList<>();
                 Record record = new Record();
@@ -171,7 +171,7 @@ public class RecordDAO {
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setDate(1, DateUtil.util2sql(start));
             ps.setDate(2, DateUtil.util2sql(end));
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 records = new ArrayList<>();
                 Record record = new Record();

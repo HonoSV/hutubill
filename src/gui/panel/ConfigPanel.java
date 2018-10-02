@@ -1,5 +1,7 @@
 package gui.panel;
 
+import entity.Config;
+import gui.listener.ConfigListener;
 import util.ColorUtil;
 import util.GUIUtil;
 
@@ -38,6 +40,12 @@ public class ConfigPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(pInput, BorderLayout.NORTH);
         this.add(pSubmit, BorderLayout.CENTER);
+
+        addListener();
+    }
+    private void addListener(){
+        ConfigListener listener = new ConfigListener();
+        bSubmit.addActionListener(listener);
     }
 
     public static void main(String[] args) {

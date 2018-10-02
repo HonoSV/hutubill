@@ -88,7 +88,7 @@ public class ConfigDAO {
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setInt(1, start);
             ps.setInt(2, count);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 cs = new ArrayList<>();
                 Config config = new Config();
@@ -112,7 +112,7 @@ public class ConfigDAO {
         String sql = "select * from config where key_ = ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)){
             ps.setString(1, key);
-            ResultSet rs = ps.executeQuery(sql);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 config = new Config();
                 config.setId(rs.getInt("id"));

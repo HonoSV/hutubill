@@ -1,7 +1,10 @@
 package gui.panel;
 
+import entity.Category;
+import gui.listener.CategoryListener;
 import gui.model.CategoryTableModel;
 import org.omg.CORBA.PUBLIC_MEMBER;
+import service.CategoryService;
 import util.ColorUtil;
 import util.GUIUtil;
 
@@ -33,6 +36,36 @@ public class CategoryPanel extends JPanel{
         this.setLayout(new BorderLayout());
         this.add(sp, BorderLayout.CENTER);
         this.add(pSubmit, BorderLayout.SOUTH);
+
+        addListener();
+        updateData();
+    }
+
+    public Category getSelectCategory(){
+        int index = t.getSelectedRow();
+        return ctm.cs.get(index);
+    }
+
+    public void updateData() {
+        ctm.cs = new CategoryService().list();
+        t.updateUI();
+        if (null != ctm.cs)
+            t.getSelectionModel().setSelectionInterval(0,0);
+
+        if (0 == ctm.cs.size()){
+            bEdit.setEnabled(false);
+            bDelete.setEnabled(false);
+        }else {
+            bEdit.setEnabled(true);
+            bDelete.setEnabled(true);
+        }
+    }
+
+    public void addListener() {
+        CategoryListener listener = new CategoryListener();
+        bAdd.addActionListener(listener);
+        bEdit.addActionListener(listener);
+        bDelete.addActionListener(listener);
     }
 
     public static void main(String[] args) {
