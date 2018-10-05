@@ -83,14 +83,13 @@ public class ConfigDAO {
     }
 
     public List<Config> list(int start, int count){
-        List<Config> cs = null;
+        List<Config> cs = new ArrayList<>();
         String sql = "select * from config limit ?,?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setInt(1, start);
             ps.setInt(2, count);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                cs = new ArrayList<>();
                 Config config = new Config();
                 config.setId(rs.getInt("id"));
                 config.setKey(rs.getString("key_"));

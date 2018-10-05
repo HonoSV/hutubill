@@ -1,5 +1,7 @@
 package util;
 
+import gui.panel.WorkingPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -39,6 +41,8 @@ public class CenterPanel extends JPanel {
             remove(c);
         }
         add(p);
+        if (p instanceof WorkingPanel)
+            ((WorkingPanel) p).updateData();
         this.updateUI();
     }
 

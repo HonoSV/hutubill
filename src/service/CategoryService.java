@@ -17,13 +17,16 @@ public class CategoryService {
         List<Category> cs = categoryDAO.list();
         for (Category c : cs){
             List<Record> rs = recordDAO.list(c.getId());
-            if (null != rs)
+            if (null != rs) {
                 c.recordNumber = rs.size();
-            else
+                System.out.println("有" + c.recordNumber);
+            }
+            else {
                 c.recordNumber = 0;
+            }
         }
         Collections.sort(cs, (c1, c2) -> c2.recordNumber - c1.recordNumber);
-        return  cs;
+        return cs;
     }
 
     public void add(String name){

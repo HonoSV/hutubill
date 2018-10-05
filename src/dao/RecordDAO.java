@@ -35,11 +35,12 @@ public class RecordDAO {
             ps.setInt(2, record.getCid());
             ps.setString(3, record.getComment());
             ps.setDate(4, DateUtil.util2sql(record.getDate()));
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()){
-                int id  = rs.getInt("id");
-                record.setId(id);
-            }
+            ps.execute();
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()){
+//                int id  = rs.getInt("id");
+//                record.setId(id);
+//            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -118,13 +119,12 @@ public class RecordDAO {
     }
 
     public List<Record> list(int cid){
-        List<Record> records = null;
+        List<Record> records = new ArrayList<>();
         String sql = "select * from record where cid = ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setInt(1, cid);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                records = new ArrayList<>();
                 Record record = new Record();
                 record.setId(rs.getInt("id"));
                 record.setSpend(rs.getInt("spend"));
@@ -136,17 +136,16 @@ public class RecordDAO {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return  null;
+        return  records;
     }
 
     public List<Record> list(Date date){
-        List<Record> records = null;
+        List<Record> records = new ArrayList<>();
         String sql = "select * from record where date = ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)){
             ps.setDate(1, DateUtil.util2sql(date));
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                records = new ArrayList<>();
                 Record record = new Record();
                 record.setId(rs.getInt("id"));
                 record.setSpend(rs.getInt("spend"));
@@ -166,14 +165,13 @@ public class RecordDAO {
     }
 
     public List<Record> list(Date start, Date end){
-        List<Record> records = null;
+        List<Record> records = new ArrayList<>();
         String sql = "selelct * from record where date >= ? and date <= ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setDate(1, DateUtil.util2sql(start));
             ps.setDate(2, DateUtil.util2sql(end));
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                records = new ArrayList<>();
                 Record record = new Record();
                 record.setId(rs.getInt("id"));
                 record.setSpend(rs.getInt("spend"));
