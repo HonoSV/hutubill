@@ -166,7 +166,7 @@ public class RecordDAO {
 
     public List<Record> list(Date start, Date end){
         List<Record> records = new ArrayList<>();
-        String sql = "selelct * from record where date >= ? and date <= ?";
+        String sql = "select * from record where date >= ? and date <= ?";
         try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql);){
             ps.setDate(1, DateUtil.util2sql(start));
             ps.setDate(2, DateUtil.util2sql(end));
