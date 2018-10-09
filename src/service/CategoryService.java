@@ -19,7 +19,6 @@ public class CategoryService {
             List<Record> rs = recordDAO.list(c.getId());
             if (null != rs) {
                 c.recordNumber = rs.size();
-                System.out.println("有" + c.recordNumber);
             }
             else {
                 c.recordNumber = 0;

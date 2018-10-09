@@ -109,7 +109,7 @@ public class SpendPanel extends WorkingPanel{
             vMonthSpend.setForeground(ColorUtil.blueColor);
             vTodaySpend.setForeground(ColorUtil.blueColor);
         }
-        bar.setBackgroundColor(ColorUtil.getByPercentage(spendPage.usagePercentage));
+        bar.setForegroundColor(ColorUtil.getByPercentage(spendPage.usagePercentage));
     }
 
     @Override
